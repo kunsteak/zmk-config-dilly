@@ -124,9 +124,9 @@
 
         nav {
             bindings = <
-            &kp ESC    &m_l LCTL LG(LBKT)  &m_l LALT LG(RBKT)   &kp KP_NUM  &kp RC(RA(UP))    /**/  &kp DEL    &kp HOME  &kp UP     &kp END    &kp BSPC
-            &kp TAB    &kp LG(LBRC)        &kp RG(RBRC)         &mkp LCLK   &kp RC(RA(DOWN))  /**/  &kp PG_UP  &kp LEFT  &kp DOWN   &kp RIGHT  &kp RET
-            &kp LSHFT  &td LG(V) LG(C)     &td LG(LA(V)) LG(X)  &mkp RCLK   &mkp MCLK         /**/  &kp PG_DN  &kp RGUI  &kp COMMA  &kp SEMI   &kp LC(LS(LALT))
+            &kp ESC    &m_l LCTL LG(LBKT)  &m_l LALT LG(RBKT)   &kp KP_NUM  &kp RC(RA(UP))    /**/  &kp DEL    &kp HOME  &kp UP       &kp END         &kp BSPC
+            &kp TAB    &kp LG(LBRC)        &kp RG(RBRC)         &mkp LCLK   &kp RC(RA(DOWN))  /**/  &kp PG_UP  &kp LEFT  &kp DOWN     &kp RIGHT       &kp RET
+            &kp LSHFT  &td LG(V) LG(C)     &td LG(LA(V)) LG(X)  &mkp RCLK   &mkp MCLK         /**/  &kp PG_DN  &kp RGUI  &key_repeat  &td COMMA SEMI  &kp LC(LS(LALT))
             >;
         };
 
