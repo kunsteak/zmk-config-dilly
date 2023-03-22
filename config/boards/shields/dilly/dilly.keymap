@@ -26,8 +26,14 @@
         compatible = "zmk,combos";
         combo_caps {
             timeout-ms = <175>;
-            key-positions = <14 15>;
+            key-positions = <4 5>;
             bindings = <&caps_word>;
+        };
+        combo_shft  {
+            timeout-ms = <175>;
+            key-positions = <14 15>;
+            bindings = <&sk LSHFT>;
+            layers = <DEF>;
         };
         combo_NAV  {
             timeout-ms = <175>;
@@ -35,11 +41,11 @@
             bindings = <&tog NAV>;
             layers = <DEF NAV>;
         };
-        combo_shft  {
+        combo_minus  {
             timeout-ms = <175>;
-            key-positions = <20 21>;
-            bindings = <&sk LSHFT>;
-            layers = <DEF>;
+            key-positions = <15 16>;
+            bindings = <&kp MINUS>;
+            layers = <SYM>;
         };
     };
 
@@ -116,9 +122,9 @@
 
         sym {
             bindings = <
-            &kp ESC    &m_l LCTL LBRC  &m_l LALT LBKT  &m_l LGUI RBKT  &kp RBRC   /**/  &td COMMA DOT  &td RS(N1) N1  &td RS(N2) N2  &td RS(N3) N3  &kp BSPC
-            &kp TAB    &kp TILDE       &kp LPAR        &kp RPAR        &kp MINUS  /**/  &kp PLUS       &td RS(N4) N4  &td RS(N5) N5  &td RS(N6) N6  &kp RET
-            &kp GRAVE  &kp BSLH        &kp PIPE        &td QMARK FSLH  &trans     /**/  &none          &td RS(N7) N7  &td RS(N8) N8  &td FSLH N9    &td EQUAL N0
+            &kp ESC    &m_l LCTL GRAVE  &m_l LALT LBKT  &m_l LGUI RBKT  &kp QMARK  /**/  &td COMMA DOT  &td RS(N1) N1  &td RS(N2) N2  &td RS(N3) N3  &kp BSPC
+            &kp TAB    &kp TILDE        &kp LPAR        &kp RPAR        &kp MINUS  /**/  &kp PLUS       &td RS(N4) N4  &td RS(N5) N5  &td RS(N6) N6  &kp RET
+            &kp LSHFT  &kp BSLH         &kp PIPE        &kp FSLH        &trans     /**/  &none          &td RS(N7) N7  &td RS(N8) N8  &td FSLH N9    &td EQUAL N0
             >;
         };
 
