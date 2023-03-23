@@ -24,29 +24,20 @@
 / { 
     combos {
         compatible = "zmk,combos";
-        combo_caps {
-            timeout-ms = <175>;
-            key-positions = <4 5>;
-            bindings = <&caps_word>;
-        };
-        combo_shft  {
-            timeout-ms = <175>;
-            key-positions = <14 15>;
-            bindings = <&sk LSHFT>;
-            layers = <DEF>;
-        };
-        combo_NAV  {
-            timeout-ms = <175>;
-            key-positions = <1 2 3>;
-            bindings = <&tog NAV>;
-            layers = <DEF NAV>;
-        };
-        combo_minus  {
-            timeout-ms = <175>;
-            key-positions = <15 16>;
-            bindings = <&kp MINUS>;
-            layers = <SYM>;
-        };
+        combo_caps       { timeout-ms = <175>; key-positions = <4 5>; bindings = <&caps_word>; };
+        combo_shft       { timeout-ms = <175>; key-positions = <14 15>; bindings = <&sk LSHFT>; layers = <DEF>; };
+        combo_NAV        { timeout-ms = <175>; key-positions = <1 2 3>; bindings = <&tog NAV>; layers = <DEF NAV>; };
+        combo_minus      { timeout-ms = <175>; key-positions = <15 16>; bindings = <&kp MINUS>; layers = <SYM>; };
+        combo_bspc_left  { timeout-ms = <175>; key-positions = <3 14>; bindings = <&kp BSPC>; };
+        combo_bspc_right { timeout-ms = <175>; key-positions = <6 15>; bindings = <&kp BSPC>; };
+        combo_del_left   { timeout-ms = <175>; key-positions = <4 13>; bindings = <&kp DEL>; };
+        combo_del_right  { timeout-ms = <175>; key-positions = <5 16>; bindings = <&kp DEL>; };
+        combo_entr_left  { timeout-ms = <175>; key-positions = <3 13>; bindings = <&kp RETURN>; };
+        combo_entr_right { timeout-ms = <175>; key-positions = <6 16>; bindings = <&kp RETURN>; };
+        combo_esc_left   { timeout-ms = <175>; key-positions = <2 3 10>; bindings = <&kp ESC>; };
+        combo_esc_right  { timeout-ms = <175>; key-positions = <6 7 19>; bindings = <&kp ESC>; };
+        combo_tab_left   { timeout-ms = <175>; key-positions = <1 2 3 10>; bindings = <&kp TAB>; };
+        combo_tab_right  { timeout-ms = <175>; key-positions = <6 7 8 19>; bindings = <&kp TAB>; };
     };
 
     behaviors {
