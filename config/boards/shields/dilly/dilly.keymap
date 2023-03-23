@@ -26,7 +26,7 @@
         compatible = "zmk,combos";
         combo_caps       { timeout-ms = <175>; key-positions = <4 5>; bindings = <&caps_word>; };
         combo_shft       { timeout-ms = <175>; key-positions = <14 15>; bindings = <&sk LSHFT>; layers = <DEF>; };
-        combo_NAV        { timeout-ms = <175>; key-positions = <1 2 3>; bindings = <&tog NAV>; layers = <DEF NAV>; };
+        combo_NAV        { timeout-ms = <175>; key-positions = <21 22 23>; bindings = <&tog NAV>; layers = <DEF NAV>; };
         combo_minus      { timeout-ms = <175>; key-positions = <15 16>; bindings = <&kp MINUS>; layers = <SYM>; };
         combo_bspc_left  { timeout-ms = <175>; key-positions = <3 14>; bindings = <&kp BSPC>; };
         combo_bspc_right { timeout-ms = <175>; key-positions = <6 15>; bindings = <&kp BSPC>; };
