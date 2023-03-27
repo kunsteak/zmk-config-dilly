@@ -32,7 +32,8 @@
         combo_bspc_right { timeout-ms = <175>; key-positions = <6 15>; bindings = <&kp BSPC>; };
         combo_del_left   { timeout-ms = <175>; key-positions = <4 13>; bindings = <&kp DEL>; };
         combo_del_right  { timeout-ms = <175>; key-positions = <5 16>; bindings = <&kp DEL>; };
-        combo_entr_right { timeout-ms = <175>; key-positions = <25 26>; bindings = <&kp RETURN>; };
+        combo_entr_left  { timeout-ms = <175>; key-positions = <22 23>; bindings = <&kp RETURN>; };
+        combo_entr_right { timeout-ms = <175>; key-positions = <26 27>; bindings = <&kp RETURN>; };
         combo_esc_left   { timeout-ms = <175>; key-positions = <3 13>; bindings = <&kp ESC>; };
         combo_esc_right  { timeout-ms = <175>; key-positions = <6 16>; bindings = <&kp ESC>; };
         combo_tab_left   { timeout-ms = <175>; key-positions = <2 3 10>; bindings = <&kp TAB>; };
