@@ -4,6 +4,35 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/mouse.h>
 
+#define U_MOUSE_MOVE_MAX 1400                     /* <--- New max speed setting (default: 600) */
+#undef MOVE_UP
+#undef MOVE_DOWN
+#undef MOVE_LEFT
+#undef MOVE_RIGHT
+#define MOVE_UP MOVE_VERT(-U_MOUSE_MOVE_MAX)
+#define MOVE_DOWN MOVE_VERT(U_MOUSE_MOVE_MAX)
+#define MOVE_LEFT MOVE_HOR(-U_MOUSE_MOVE_MAX)
+#define MOVE_RIGHT MOVE_HOR(U_MOUSE_MOVE_MAX)
+
+&mmv {
+	time-to-max-speed-ms = <400>;             /* <--- How long until max speed is reached (default: 500) */
+};
+
+#define U_MOUSE_SCROLL_MAX 100                    /* <--- New max speed setting (default: 10) */
+
+#undef SCROLL_UP
+#undef SCROLL_DOWN
+#undef SCROLL_LEFT
+#undef SCROLL_RIGHT
+#define SCROLL_UP SCROLL_VERT(U_MOUSE_SCROLL_MAX)
+#define SCROLL_DOWN SCROLL_VERT(-U_MOUSE_SCROLL_MAX)
+#define SCROLL_LEFT SCROLL_HOR(-U_MOUSE_SCROLL_MAX)
+#define SCROLL_RIGHT SCROLL_HOR(U_MOUSE_SCROLL_MAX)
+
+&mwh {
+  time-to-max-speed-ms = <500>;                 /* <--- How long until max speed is reached */
+};
+
 &mt {
     tapping-term-ms = <250>;
     flavor = "tap-preferred";
@@ -20,14 +49,21 @@
 #define DEF 0
 #define SYM 1
 #define NAV 2	
-#define BLT 3
+#define MSE 3
+#define BLT 4
 / { 
     combos {
         compatible = "zmk,combos";
+        combo_NAV_l      { timeout-ms = <175>; key-positions = <11 2 13>; bindings = <&tog NAV>; };
+        combo_NAV_r      { timeout-ms = <175>; key-positions = <16 7 18>; bindings = <&tog NAV>; };
+        combo_MSE_l      { timeout-ms = <175>; key-positions = <1 12 3>; bindings = <&tog MSE>; };
+        combo_MSE_r      { timeout-ms = <175>; key-positions = <6 17 8>; bindings = <&tog MSE>; };
         combo_caps       { timeout-ms = <175>; key-positions = <4 5>; bindings = <&caps_word>; };
-        combo_shft       { timeout-ms = <175>; key-positions = <14 15>; bindings = <&sk LSHFT>; layers = <DEF>; };
-        combo_NAV        { timeout-ms = <175>; key-positions = <21 22 23>; bindings = <&tog NAV>; layers = <DEF NAV>; };
+        combo_shft       { timeout-ms = <175>; key-positions = <14 15>; bindings = <&sk LSHFT>; };
         combo_minus      { timeout-ms = <175>; key-positions = <15 16>; bindings = <&kp MINUS>; layers = <SYM>; };
+        combo_under      { timeout-ms = <175>; key-positions = <13 14>; bindings = <&kp UNDER>; layers = <SYM>; };
+        combo_comma      { timeout-ms = <175>; key-positions = <5 6>; bindings = <&kp COMMA>; layers = <SYM>; };
+        combo_numlock    { timeout-ms = <175>; key-positions = <13 14>; bindings = <&kp KP_NUM>; layers = <NAV>; };
         combo_bspc_left  { timeout-ms = <175>; key-positions = <3 14>; bindings = <&kp BSPC>; };
         combo_bspc_right { timeout-ms = <175>; key-positions = <6 15>; bindings = <&kp BSPC>; };
         combo_del_left   { timeout-ms = <175>; key-positions = <4 13>; bindings = <&kp DEL>; };
@@ -103,35 +139,43 @@
     keymap {
         compatible = "zmk,keymap";
 
-        default {
+        def {
             bindings = <
             &kp Y  &m_l LCTL C  &m_l LALT L  &m_l LGUI M  &l_l BLT K            /**/  &l_r BLT Z  &m_r RGUI F  &m_r RALT U  &m_r RCTL COMMA  &td DQT SQT
-            &kp I  &kp S        &kp R        &l_l NAV T   &kp G                 /**/  &kp P       &l_r NAV N   &kp E        &kp A            &kp O
+            &kp I  &kp S        &l_l MSE R   &l_l NAV T   &kp G                 /**/  &kp P       &l_r NAV N   &l_r MSE E   &kp A            &kp O
             &kp Q  &kp V        &kp W        &kp D        &mt LC(LS(LALT)) SPC  /**/  &l_r SYM B  &kp H        &kp J        &td COLON DOT    &td SEMI X
             >;
         };
 
         sym {
             bindings = <
-            &kp ESC    &m_l LCTL GRAVE  &m_l LALT LBKT  &m_l LGUI RBKT  &kp QMARK  /**/  &td COMMA DOT  &td RS(N1) N1  &td RS(N2) N2  &td RS(N3) N3  &kp BSPC
-            &kp TAB    &kp TILDE        &kp LPAR        &kp RPAR        &kp MINUS  /**/  &kp PLUS       &td RS(N4) N4  &td RS(N5) N5  &td RS(N6) N6  &kp RET
-            &kp LSHFT  &kp BSLH         &kp PIPE        &kp FSLH        &trans     /**/  &none          &td RS(N7) N7  &td RS(N8) N8  &td FSLH N9    &td EQUAL N0
+            &kp ESC    &m_l LCTL GRAVE  &m_l LALT LBKT  &m_l LGUI RBKT  &kp QMARK  /**/  &kp DOT   &td RS(N1) N1  &td RS(N2) N2  &td RS(N3) N3  &kp BSPC
+            &kp TAB    &kp TILDE        &kp LPAR        &kp RPAR        &kp MINUS  /**/  &kp PLUS  &td RS(N4) N4  &td RS(N5) N5  &td RS(N6) N6  &kp N0
+            &kp LSHFT  &kp BSLH         &kp PIPE        &kp FSLH        &trans     /**/  &none     &td RS(N7) N7  &td RS(N8) N8  &td FSLH N9    &kp EQUAL
             >;
         };
 
         nav {
             bindings = <
-            &kp ESC    &m_l LCTL LG(LBKT)  &m_l LALT LG(RBKT)   &kp KP_NUM  &kp RC(RA(UP))    /**/  &kp DEL    &kp HOME  &kp UP       &kp END         &kp BSPC
-            &kp TAB    &kp LG(LBRC)        &kp RG(RBRC)         &mkp LCLK   &kp RC(RA(DOWN))  /**/  &kp PG_UP  &kp LEFT  &kp DOWN     &kp RIGHT       &kp RET
-            &kp LSHFT  &td LG(V) LG(C)     &td LG(LA(V)) LG(X)  &mkp RCLK   &mkp MCLK         /**/  &kp PG_DN  &kp RGUI  &key_repeat  &td COMMA SEMI  &kp LC(LS(LALT))
+            &kp ESC    &m_l LCTL LG(LBKT)  &m_l LALT LG(RBKT)  &td LG(X) LG(C)  &td LG(LA(V)) LG(V)  /**/  &kp PG_UP    &kp HOME  &kp UP     &kp END    &kp BSPC
+            &kp TAB    &kp LG(LBRC)        &kp RG(RBRC)        &mkp LCLK        &mkp RCLK            /**/  &kp PG_DN    &kp LEFT  &kp DOWN   &kp RIGHT  &kp RET
+            &kp LSHFT  &kp RC(RA(DOWN))    &kp RC(RA(UP))      &mkp MCLK        &trans               /**/  &key_repeat  &kp RGUI  &kp COMMA  &kp SEMI   &kp LC(LS(LALT))
+            >;
+        };
+
+        mse {
+            bindings = <
+            &kp ESC    &m_l LCTL LG(LBKT)  &m_l LALT LG(RBKT)  &td LG(X) LG(C)  &td LG(LA(V)) LG(V)  /**/  &mwh SCROLL_UP    &mwh SCROLL_LEFT  &mmv MOVE_UP    &mwh SCROLL_RIGHT  &kp BSPC
+            &kp TAB    &kp LG(LBRC)        &kp RG(RBRC)        &mkp LCLK        &mkp RCLK            /**/  &mwh SCROLL_DOWN  &mmv MOVE_LEFT    &mmv MOVE_DOWN  &mmv MOVE_RIGHT    &kp RET
+            &kp LSHFT  &kp RC(RA(DOWN))    &kp RC(RA(UP))      &mkp MCLK        &trans               /**/  &key_repeat       &kp RGUI          &none           &none              &none
             >;
         };
 
         ble {
             bindings = <
-            &out OUT_BLE  &none  &none  &none        &none  /**/  &none  &none        &none  &none  &out OUT_BLE
-            &none         &none  &none  &bootloader  &none  /**/  &none  &bootloader  &none  &none  &none
-            &reset        &none  &none  &none        &none  /**/  &none  &none        &none  &none  &reset
+            &out OUT_BLE  &none  &none  &none        &none       /**/  &none       &none        &none  &none  &out OUT_BLE
+            &none         &none  &none  &bootloader  &none       /**/  &none       &bootloader  &none  &none  &none
+            &reset        &none  &none  &none        &bt BT_CLR  /**/  &bt BT_CLR  &none        &none  &none  &reset
             >;
         };
 
