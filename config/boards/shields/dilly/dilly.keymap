@@ -44,10 +44,12 @@
         combo_NAV_r   { timeout-ms = <175>; key-positions = <6 7 8>; bindings = <&tog NAV>; };
         combo_tab_l   { timeout-ms = <175>; key-positions = <2 3 10>; bindings = <&kp TAB>; };
         combo_tab_r   { timeout-ms = <175>; key-positions = <6 7 19>; bindings = <&kp TAB>; };
+        combo_meh_r   { timeout-ms = <175>; key-positions = <21 22 23>; bindings = <&sk LC(LS(LALT))>; };
+        combo_meh_l   { timeout-ms = <175>; key-positions = <26 27 28>; bindings = <&sk LC(LS(LALT))>; };
     };
 
     behaviors {
-        m_l: mods_left {
+        mod: mods {
             compatible = "zmk,behavior-hold-tap";
             label = "MODS_L";
             #binding-cells = <2>;
@@ -56,25 +58,7 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
-        m_r: mods_right {
-            compatible = "zmk,behavior-hold-tap";
-            label = "MODS_R";
-            #binding-cells = <2>;
-            tapping-term-ms = <300>;
-            quick-tap-ms = <250>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
-        };
-        l_l: layers_left {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LAYERS_L";
-            #binding-cells = <2>;
-            tapping-term-ms = <220>;
-            quick-tap-ms = <250>;
-            flavor = "tap-preferred";
-            bindings = <&mo>, <&kp>;
-        };
-        l_r: layers_right {
+        lyr: layers {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYERS_R";
             #binding-cells = <2>;
@@ -82,14 +66,6 @@
             quick-tap-ms = <250>;
             flavor = "tap-preferred";
             bindings = <&mo>, <&kp>;
-        };
-        skq: sticky_key_quick_release {
-            compatible = "zmk,behavior-sticky-key";
-            label = "STICKY_KEY_QUICK_RELEASE";
-            #binding-cells = <1>;
-            bindings = <&kp>;
-            release-after-ms = <2000>;
-            quick-release;
         };
         td: tapdance {
             compatible = "zmk,behavior-hold-tap";
@@ -111,25 +87,25 @@
 
         def {
             bindings = <
-            &kp Y  &m_l LCTL C  &m_l LALT L  &m_l LGUI M  &l_l BLT K            /**/  &l_r BLT Z  &m_r RGUI F  &m_r RALT U  &m_r RCTL COMMA  &td DQT SQT
-            &kp I  &kp S        &kp R        &l_l NAV T   &kp G                 /**/  &kp P       &l_r NAV N   &kp E        &kp A            &kp O
-            &kp Q  &kp V        &kp W        &kp D        &mt LC(LS(LALT)) SPC  /**/  &l_r SYM B  &kp H        &kp J        &td COLON DOT    &td SEMI X
+            &kp Y  &mod LCTL C  &mod LALT L  &mod LGUI M  &lyr BLT K    /**/  &lyr BLT Z  &mod RGUI F  &mod RALT U  &mod RCTL COMMA  &td DQT SQT
+            &kp I  &kp S        &kp R        &kp T        &kp G         /**/  &kp P       &kp N        &kp E        &kp A            &kp O
+            &kp Q  &kp V        &kp W        &kp D        &lyr NAV SPC  /**/  &lyr SYM B  &kp H        &kp J        &td COLON DOT    &td SEMI X
             >;
         };
 
         sym {
             bindings = <
-            &kp ESC    &m_l LCTL GRAVE  &m_l LALT LBKT  &m_l LGUI RBKT  &kp QMARK  /**/  &kp PLUS   &kp N1  &kp N2  &kp N3  &kp EQUAL
+            &kp ESC    &mod LCTL GRAVE  &mod LALT LBKT  &mod LGUI RBKT  &kp QMARK  /**/  &kp PLUS   &kp N1  &kp N2  &kp N3  &kp EQUAL
             &kp TAB    &kp TILDE        &kp LPAR        &kp RPAR        &kp UNDER  /**/  &kp MINUS  &kp N4  &kp N5  &kp N6  &kp N0
-            &kp LSHFT  &kp BSLH         &kp PIPE        &kp FSLH        &trans     /**/  &none      &kp N7  &kp N8  &kp N9  &kp FSLH
+            &kp LSHFT  &kp BSLH         &kp PIPE        &kp FSLH        &kp SPC    /**/  &none      &kp N7  &kp N8  &kp N9  &kp FSLH
             >;
         };
 
         nav {
             bindings = <
-            &kp ESC    &m_l LCTL LG(LBKT)  &m_l LALT LG(RBKT)  &td LG(X) LG(C)  &td LG(LA(V)) LG(V)  /**/  &kp PG_UP    &kp HOME  &kp UP     &kp END    &kp BSPC
-            &kp TAB    &kp LG(LBRC)        &kp RG(RBRC)        &mkp LCLK        &mkp RCLK            /**/  &kp PG_DN    &kp LEFT  &kp DOWN   &kp RIGHT  &kp RET
-            &kp LSHFT  &kp RC(RA(DOWN))    &kp RC(RA(UP))      &mkp MCLK        &trans               /**/  &key_repeat  &kp RGUI  &kp COMMA  &kp SEMI   &kp LC(LS(LALT))
+            &kp ESC    &kp LG(LBKT)      &kp RG(RBKT)    &td LG(X) LG(C)  &td LG(LA(V)) LG(V)  /**/  &kp PG_UP  &kp HOME  &kp UP    &kp END           &kp BSPC
+            &kp TAB    &kp LG(LBRC)      &kp RG(RBRC)    &mkp LCLK        &mkp RCLK            /**/  &kp PG_DN  &kp LEFT  &kp DOWN  &kp RIGHT         &kp RET
+            &kp LSHFT  &kp RC(RA(DOWN))  &kp RC(RA(UP))  &mkp MCLK        &kp SPC              /**/  &kp RGUI   &kp RALT  &kp RCTL  &sk LC(LS(LALT))  &kp RSHFT
             >;
         };
 
